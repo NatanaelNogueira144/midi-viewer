@@ -1,0 +1,1 @@
+export type KeyboardSize = 'piano'|'large'|'medium'|'small';
