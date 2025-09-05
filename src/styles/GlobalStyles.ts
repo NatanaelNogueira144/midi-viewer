@@ -23,11 +23,16 @@ export default createGlobalStyle`
     }
 
     h1 {
-        margin-bottom: 30px; 
+        font-size: 1.5rem;
     }
 
-    p {
+    h1, h2, h3, h4, h5, h6 {
+        color: ${props => props.theme.headingColor};
+    } 
+
+    p, span {
         font-size: 1rem;
-        margin-bottom: 1rem;
+        margin-bottom: 7px;
+        color: ${props => props.theme.textColor};
     }
 `;

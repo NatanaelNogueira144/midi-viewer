@@ -1,19 +1,21 @@
 import './index.css';
 import GlobalStyles from './styles/GlobalStyles';
-import HomePage from './components/pages/HomePage';
-import main from './styles/themes/main';
+import Routes from './routes';
+import ThemeContext from './data/contexts/ThemeContext';
 import { ThemeProvider } from 'styled-components';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 
 export default function App() {
+	const { theme } = useContext(ThemeContext);
+
 	useEffect(() => {
 		document.title = 'MIDI Viewer';
 	}, []);
 	
 	return (
-		<ThemeProvider theme={main}>
+		<ThemeProvider theme={theme}>
 			<GlobalStyles />
-			<HomePage />
+			<Routes />
 		</ThemeProvider>
 	);
 }
