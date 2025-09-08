@@ -34,7 +34,7 @@ export default function MIDIListArea() {
                                     name: file.name.replace('.mid', '').replace('.midi', ''),
                                     division: json.division,
                                     duration: (
-                                        json.tracks[0].reduce((a, t) => a + t.delta, 0) / json.division
+                                        json.tracks[json.tracks.length - 1].reduce((a, t) => a + t.delta, 0) / json.division
                                     ) * microsecondsPerQuarter / 1000,
                                     tempo: Math.round(60000000 / microsecondsPerQuarter),
                                     tracks: json.tracks.map((track, trackIndex) => {
