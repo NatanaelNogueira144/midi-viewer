@@ -36,7 +36,35 @@ export const TimeController = styled.span.attrs(props => ({
         color: props.theme.textColor
     }
 }))`
-    font-size: 1.5rem;
+    margin: 0;
+    font-size: 1.7rem;
+    width: 30px;
+    cursor: pointer;
+    transition: opacity 0.3s;
+
+    &:hover {
+        opacity: 0.7;
+    }
+`;
+
+export const TogglesContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+`;
+
+interface ToggleButtonProps {
+    $isactive: boolean;
+}
+
+export const ToggleButton = styled.span.attrs<ToggleButtonProps>(props => ({
+    style: {
+        color: props.$isactive ? props.theme.headingColor : props.theme.textColor
+    }
+}))`
+    margin: 0;
+    font-size: 1.7rem;
     width: 30px;
     cursor: pointer;
     transition: opacity 0.3s;

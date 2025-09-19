@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.0] - 2025-09-19
+### Added
+- Notes on the keys.
+- Notes on the blocks.
+- Notes name toggle button.
+- All MIDI instruments mapped.
+- Icons for each instrument.
+- Soundfonts for the MIDI Player.
+
+### Changed
+- "Unnamed track" to "Track + index".
+
 ## [0.2.1] - 2025-09-08
 ## Fixed
 - MIDI duration.

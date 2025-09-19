@@ -2,17 +2,32 @@ import Button from "../Button";
 import MidiContext from "../../data/contexts/MidiContext";
 import MidiKeyboard from "../MIDIKeyboard";
 import RoutesContext from "../../data/contexts/RoutesContext";
+import Soundfont from 'soundfont-player';
 import keyboard from "../../core/utils/keyboard";
 import useAPI from "../../data/hooks/useAPI";
-import { Container, Header, ProgressBar, ProgressBarFill, TimeController, TimeControllersContainer } from "./styles";
+import {
+    Container,
+    Header,
+    ProgressBar,
+    ProgressBarFill,
+    TimeController,
+    TimeControllersContainer,
+    ToggleButton,
+    TogglesContainer
+} from "./styles";
 import { useContext, useEffect, useRef, useState } from "react";
 
-export default function PlayMidiArea() {
+interface PlayMidiAreaProps {
+    instruments: {[key: number]: Soundfont.Player};
+}
+
+export default function PlayMidiArea({ instruments }: PlayMidiAreaProps) {
     const { api } = useAPI();
     const { selectedMidi } = useContext(MidiContext);
     const { setCurrentRoute } = useContext(RoutesContext);
     const [currentTime, setCurrentTime] = useState(-2000);
     const [isPaused, setIsPaused] = useState(false);
+    const [showNotes, setShowNotes] = useState(false);
     const intervalRef = useRef(undefined as undefined|NodeJS.Timer);
 
     useEffect(() => {
@@ -40,7 +55,14 @@ export default function PlayMidiArea() {
                     <TimeController onClick={() => setIsPaused(!isPaused)}>{isPaused ? '▶' : '⏸︎'}</TimeController>
                     <TimeController onClick={() => setCurrentTime(totalTime)}>⏭︎</TimeController>
                 </TimeControllersContainer>
-                <div></div>
+                <TogglesContainer>
+                    <ToggleButton 
+                        $isactive={showNotes} 
+                        onClick={() => setShowNotes(!showNotes)}
+                    >
+                        Aa
+                    </ToggleButton>
+                </TogglesContainer>
             </Header>
 
             <ProgressBar onClick={(e) => setCurrentTime(e.clientX * totalTime / e.currentTarget.clientWidth)}>
@@ -50,9 +72,11 @@ export default function PlayMidiArea() {
             <MidiKeyboard 
                 blackKeys={keyboard[keyboardSize].blackKeyNotes}
                 currentTime={currentTime}
+                instruments={instruments}
                 totalTime={totalTime}
                 notes={notes}
                 onMidiEnd={() => setCurrentRoute('MidiSelect')}
+                showNotes={showNotes}
                 size={keyboardSize}
                 whiteKeys={keyboard[keyboardSize].whiteKeyNotes}
             />

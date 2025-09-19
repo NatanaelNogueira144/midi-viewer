@@ -42,7 +42,32 @@ export const ColorSquare = styled.div<ColorSquareProps>`
     }
 `;
 
-export const HeaderInfoContainer = styled.div``;
+export const LeftContainer = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 10px;
+`;
+
+export const InstrumentImageWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 5px;
+    background-color: #FFF;
+`;
+
+export const InstrumentImage = styled.img`
+    width: 56px;
+    height: 56px;
+`;
+
+export const InfoContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+`;
 
 export const Subtitle = styled.div`
     font-size: 0.8rem;

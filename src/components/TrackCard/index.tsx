@@ -5,7 +5,10 @@ import {
     ColorSelector,
     ColorSquare,
     Container,
-    HeaderInfoContainer,
+    InfoContainer,
+    InstrumentImage,
+    InstrumentImageWrapper,
+    LeftContainer,
     SpeakerSwitch,
     Subtitle,
     Title
@@ -13,6 +16,7 @@ import {
 import { ITrack } from "../../core/interfaces/models/track.interface";
 import { ITrackPallete } from "../../core/interfaces/models/track-pallete.interface";
 import { useState } from "react";
+import instruments from "../../core/utils/instruments";
 
 interface TrackCardProps {
     track: ITrack;
@@ -49,10 +53,15 @@ export default function TrackCard({ onColorChange, onMutedChange, track }: Track
                 </ColorsContainer>
             ) : (
                 <>
-                    <HeaderInfoContainer>
-                        <Title>{track.name}</Title>
-                        <Subtitle>{track.notes.length} Notes</Subtitle>
-                    </HeaderInfoContainer>
+                    <LeftContainer>
+                        <InstrumentImageWrapper>
+                            <InstrumentImage src={instruments[track.instrumentNumber].image} />
+                        </InstrumentImageWrapper>
+                        <InfoContainer>
+                            <Title>{instruments[track.instrumentNumber].name}</Title>
+                            <Subtitle>{track.notes.length} Notes</Subtitle>
+                        </InfoContainer>
+                    </LeftContainer>
                     <ActionsContainer>
                         <SpeakerSwitch onClick={toggleSound}>{track.isMuted ? '🔇' : '🔊'}</SpeakerSwitch>
                         <ColorSelector 

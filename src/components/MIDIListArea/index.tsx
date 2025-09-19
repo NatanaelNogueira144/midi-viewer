@@ -28,6 +28,8 @@ export default function MIDIListArea() {
                                 json.tracks[0].find(e => !!e.setTempo)!.setTempo as { microsecondsPerQuarter: number }
                             ).microsecondsPerQuarter;
 
+                            let programNumber = 0;
+
                             setMidis([
                                 ...midis, 
                                 api.midi.store({
@@ -47,13 +49,18 @@ export default function MIDIListArea() {
 
                                             track.forEach(event => {
                                                 time += (event.delta / json.division) * microsecondsPerQuarter / 1000;
-                                                if(event.setTempo) {
+                                                if(event.programChange) {
+                                                    programNumber = (
+                                                        event.programChange as { programNumber: number }
+                                                    ).programNumber;
+                                                } else if(event.setTempo) {
                                                     let setTempo = event.setTempo as { microsecondsPerQuarter: number };
                                                     microsecondsPerQuarter = setTempo.microsecondsPerQuarter;
                                                 } else if(event.noteOn) {
                                                     let noteOn = event.noteOn as { noteNumber: number; velocity: number };
                                                     notesOn.push({
                                                         key: noteOn.noteNumber,
+                                                        instrument: programNumber,
                                                         startsAt: time,
                                                         endsAt: 0,
                                                         velocity: noteOn.velocity,
@@ -75,7 +82,8 @@ export default function MIDIListArea() {
                                         }
 
                                         return {
-                                            name: track.find(e => !!e.trackName)?.trackName ?? 'Unnamed track',
+                                            name: track.find(e => !!e.trackName)?.trackName ?? `Track ${trackIndex + 1}`,
+                                            instrumentNumber: programNumber,
                                             whiteKeyColor: trackPallete.whiteKey,
                                             blackKeyColor: trackPallete.blackKey,
                                             textColor: trackPallete.textColor,
