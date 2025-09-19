@@ -1,16 +1,33 @@
 {
   "files": {
     "main.css": "/midi-viewer/static/css/main.93a0497a.css",
-    "main.js": "/midi-viewer/static/js/main.2fbb0ecf.js",
+    "main.js": "/midi-viewer/static/js/main.e8802fa7.js",
     "static/js/453.21da5962.chunk.js": "/midi-viewer/static/js/453.21da5962.chunk.js",
+    "static/media/acoustic-bass.png": "/midi-viewer/static/media/acoustic-bass.104a05d0c37b7a5e05c8.png",
+    "static/media/choir.png": "/midi-viewer/static/media/choir.38e9aa9704f82f957010.png",
+    "static/media/accordion.png": "/midi-viewer/static/media/accordion.a5934792a341a01f7187.png",
+    "static/media/bagpipe.png": "/midi-viewer/static/media/bagpipe.235c515bc26a4b9121ef.png",
+    "static/media/cymbal.png": "/midi-viewer/static/media/cymbal.d0a86d2ccf2c695e86a7.png",
+    "static/media/applause.png": "/midi-viewer/static/media/applause.51a8cf15f1e6e2d1c0d7.png",
+    "static/media/taiko-drum.png": "/midi-viewer/static/media/taiko-drum.478ee22bb81cc816dddd.png",
+    "static/media/koto.png": "/midi-viewer/static/media/koto.692286df52867b767f65.png",
+    "static/media/viola.png": "/midi-viewer/static/media/viola.ae1aa4c5190d3f9e6015.png",
+    "static/media/ocarina.png": "/midi-viewer/static/media/ocarina.b4b90d096c918f706cb1.png",
+    "static/media/telephone-ring.png": "/midi-viewer/static/media/telephone-ring.10a2093984dbf27a0d33.png",
+    "static/media/cello.png": "/midi-viewer/static/media/cello.168b6fedb04d8b56d470.png",
+    "static/media/electric-guitar.png": "/midi-viewer/static/media/electric-guitar.2828941c9b93aa1d2792.png",
+    "static/media/tuba.png": "/midi-viewer/static/media/tuba.d3ef85360de47be6fefb.png",
+    "static/media/violin.png": "/midi-viewer/static/media/violin.6fbe80c84e882206bc3e.png",
+    "static/media/fiddle.png": "/midi-viewer/static/media/fiddle.cc17a5e55d331ed76207.png",
+    "static/media/string-ensemble.png": "/midi-viewer/static/media/string-ensemble.178ec9bb5ac377276c4d.png",
     "static/media/logo.png": "/midi-viewer/static/media/logo.7d0ecb4109a728379d71.png",
     "index.html": "/midi-viewer/index.html",
     "main.93a0497a.css.map": "/midi-viewer/static/css/main.93a0497a.css.map",
-    "main.2fbb0ecf.js.map": "/midi-viewer/static/js/main.2fbb0ecf.js.map",
+    "main.e8802fa7.js.map": "/midi-viewer/static/js/main.e8802fa7.js.map",
     "453.21da5962.chunk.js.map": "/midi-viewer/static/js/453.21da5962.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.93a0497a.css",
-    "static/js/main.2fbb0ecf.js"
+    "static/js/main.e8802fa7.js"
   ]
 }
