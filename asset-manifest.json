@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/midi-viewer/static/css/main.93a0497a.css",
-    "main.js": "/midi-viewer/static/js/main.e8802fa7.js",
+    "main.js": "/midi-viewer/static/js/main.b2fcadba.js",
     "static/js/453.21da5962.chunk.js": "/midi-viewer/static/js/453.21da5962.chunk.js",
     "static/media/acoustic-bass.png": "/midi-viewer/static/media/acoustic-bass.104a05d0c37b7a5e05c8.png",
     "static/media/choir.png": "/midi-viewer/static/media/choir.38e9aa9704f82f957010.png",
@@ -23,11 +23,11 @@
     "static/media/logo.png": "/midi-viewer/static/media/logo.7d0ecb4109a728379d71.png",
     "index.html": "/midi-viewer/index.html",
     "main.93a0497a.css.map": "/midi-viewer/static/css/main.93a0497a.css.map",
-    "main.e8802fa7.js.map": "/midi-viewer/static/js/main.e8802fa7.js.map",
+    "main.b2fcadba.js.map": "/midi-viewer/static/js/main.b2fcadba.js.map",
     "453.21da5962.chunk.js.map": "/midi-viewer/static/js/453.21da5962.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.93a0497a.css",
-    "static/js/main.e8802fa7.js"
+    "static/js/main.b2fcadba.js"
   ]
 }
