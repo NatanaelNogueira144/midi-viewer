@@ -1,40 +1,65 @@
 import Soundfont from 'soundfont-player';
-import noteNames from "../../core/utils/music-utils";
-import { BlackKey, BlackKeyBlock, BlocksArea, Container, Keyboard, NoteText, WhiteKey, WhiteKeyBlock } from "./styles";
+import {
+    Block,
+    BlocksArea,
+    Container,
+    Key,
+    Keyboard,
+    NoteText
+} from "./styles";
 import { INote } from "../../core/interfaces/models/note.interface";
 import { KeyboardSize } from "../../core/types/keyboard-size.type";
 import { playNote } from "../../core/utils/web-audio-api";
 import { useEffect } from "react";
+import { range } from '../../core/utils/array-utils';
+import { getNoteDuration, isNoteNatural } from '../../core/utils/note-utils';
 
 interface MIDIKeyboardProps {
-    blackKeys: number[];
     currentTime: number;
     instruments: {[key: number]: Soundfont.Player};
     notes: INote[];
     onMidiEnd: () => void;
     showNotes: boolean;
-    size: KeyboardSize;
+    keyboardSize: KeyboardSize;
     totalTime: number;
-    whiteKeys: number[];
 }
 
+const notesRange = {
+    piano: [21, 108],
+    large: [28, 103],
+    medium: [36, 96],
+    small: [48, 84]
+};
+
+const noteNames = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+
 export default function MIDIKeyboard({ 
-    blackKeys,
     currentTime,
     instruments,
     notes,
     onMidiEnd,
     showNotes,
-    size,
+    keyboardSize,
     totalTime,
-    whiteKeys
 }: MIDIKeyboardProps) {
+    const whiteKeysIndexes = range(127).filter(note => 
+        note >= notesRange[keyboardSize][0] 
+        && note <= notesRange[keyboardSize][1] 
+        && isNoteNatural(note)
+    );
+
+    const blackKeysIndexes = range(127).filter(note => 
+        note >= notesRange[keyboardSize][0] 
+        && note <= notesRange[keyboardSize][1] 
+        && !isNoteNatural(note)
+    );
+
     useEffect(() => {
         if(currentTime > totalTime + 1000) {
             onMidiEnd();
         }
 
-        notes.filter(b => b.startsAt < currentTime && b.startsAt + 37 > currentTime && currentTime < b.endsAt).forEach(b => {
+        notes.filter(b => b.startsAt < currentTime && b.startsAt + 30 > currentTime && currentTime < b.endsAt).forEach(b => {
             playNote(instruments[b.instrument], b);
         });
     }, [currentTime, instruments, totalTime, notes, onMidiEnd]);
@@ -42,58 +67,26 @@ export default function MIDIKeyboard({
     return (
         <Container>
             <BlocksArea>
-                {notes.map((note, key) => whiteKeys.includes(note.key) ? (
-                    note.startsAt - currentTime > 0 - (note.endsAt - note.startsAt) 
+                {notes.map((note, key) => 
+                    note.startsAt - currentTime > -getNoteDuration(note) 
                     && note.startsAt < currentTime + 4000 
                     && (
-                        <WhiteKeyBlock
-                            key={key}
-                            $color={note.color}
-                            $duration={note.endsAt - note.startsAt} 
-                            $keyboardsize={size}
-                            $position={note.startsAt - currentTime}
-                            $notenumber={note.key}
-                        >
-                            {showNotes && <NoteText>{noteNames[note.key % 12]}</NoteText>}
-                        </WhiteKeyBlock>
+                        <Block key={key} $note={note} $currenttime={currentTime} $keyboardsize={keyboardSize}>
+                            {showNotes && <NoteText>{noteNames[note.index % 12]}</NoteText>}
+                        </Block>
                     )
-                ) : (
-                    note.startsAt - currentTime > 0 - (note.endsAt - note.startsAt) 
-                    && note.startsAt < currentTime + 4000 
-                    && (
-                        <BlackKeyBlock
-                            key={key}
-                            $color={note.color}
-                            $duration={note.endsAt - note.startsAt} 
-                            $keyboardsize={size}
-                            $position={note.startsAt - currentTime}
-                            $notenumber={note.key}
-                        >
-                            {showNotes && <NoteText>{noteNames[note.key % 12]}</NoteText>}
-                        </BlackKeyBlock>
-                    )
-                ))}
+                )}
             </BlocksArea>
             <Keyboard>
-                {whiteKeys.map((noteNumber, key) => (
-                    <WhiteKey 
+                {[...whiteKeysIndexes, ...blackKeysIndexes].map((noteIndex, key) => (
+                    <Key 
                         key={key}
-                        $keyboardsize={size}
-                        $notenumber={noteNumber}
-                        $pressednote={notes.find(b => b.key === noteNumber && b.startsAt < currentTime && currentTime < b.endsAt)}
+                        $noteindex={noteIndex}
+                        $pressednote={notes.find(b => b.index === noteIndex && b.startsAt < currentTime && currentTime < b.endsAt)}
+                        $keyboardsize={keyboardSize}
                     >
-                        {showNotes && <NoteText>{noteNames[noteNumber % 12]}</NoteText>}
-                    </WhiteKey>
-                ))}
-                {blackKeys.map((noteNumber, key) => (
-                    <BlackKey 
-                        key={key}
-                        $keyboardsize={size}
-                        $notenumber={noteNumber}
-                        $pressednote={notes.find(b => b.key === noteNumber && b.startsAt < currentTime && currentTime < b.endsAt)}
-                    >
-                        {showNotes && <NoteText>{noteNames[noteNumber % 12]}</NoteText>}
-                    </BlackKey>
+                        {showNotes && <NoteText>{noteNames[noteIndex % 12]}</NoteText>}
+                    </Key>
                 ))}
             </Keyboard>
         </Container>

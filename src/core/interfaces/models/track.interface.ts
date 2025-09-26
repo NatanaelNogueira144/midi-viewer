@@ -2,7 +2,7 @@ import { INote } from "./note.interface";
 
 export interface ITrack {
     name: string;
-    instrumentNumber: number;
+    instrumentIndex: number;
     whiteKeyColor: string;
     blackKeyColor: string;
     textColor: string;

@@ -1,5 +1,5 @@
 export interface INote {
-    key: number
+    index: number;
     instrument: number;
     startsAt: number;
     endsAt: number;

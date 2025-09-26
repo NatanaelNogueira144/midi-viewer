@@ -79,6 +79,7 @@ export const ProgressBar = styled.div`
     width: 100%;
     background-color: #2C2C2C;
     cursor: pointer;
+    box-shadow: inset 0 0 4px black;
 `;
 
 interface ProgressBarFillProps {
@@ -95,4 +96,5 @@ export const ProgressBarFill = styled.div.attrs<ProgressBarFillProps>(props => (
     }
 }))`
     height: 100%;
+    box-shadow: inset 0 0 4px black;
 `;

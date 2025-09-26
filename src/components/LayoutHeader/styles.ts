@@ -21,7 +21,7 @@ export const ToggleButton = styled.button`
         display: block;
         width: 35px;
         height: 5px;
-        background: ${props => props.theme.textColor};
+        background-color: ${props => props.theme.textColor};
         border-radius: 2px;
     }
 

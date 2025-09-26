@@ -55,10 +55,10 @@ export default function TrackCard({ onColorChange, onMutedChange, track }: Track
                 <>
                     <LeftContainer>
                         <InstrumentImageWrapper>
-                            <InstrumentImage src={instruments[track.instrumentNumber].image} />
+                            <InstrumentImage src={instruments[track.instrumentIndex].image} />
                         </InstrumentImageWrapper>
                         <InfoContainer>
-                            <Title>{instruments[track.instrumentNumber].name}</Title>
+                            <Title>{instruments[track.instrumentIndex].name}</Title>
                             <Subtitle>{track.notes.length} Notes</Subtitle>
                         </InfoContainer>
                     </LeftContainer>

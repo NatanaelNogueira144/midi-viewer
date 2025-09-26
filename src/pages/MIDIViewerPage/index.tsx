@@ -15,8 +15,8 @@ export default function MIDIViewerPage() {
             const audioCtx = new (window.AudioContext)();
             let midiInstruments: {[key: number]: Soundfont.Player} = {};
             for(let i = 0; i < midi.tracks.length; i++) {
-                if(!midiInstruments?.[midi.tracks[i].instrumentNumber]) {
-                    midiInstruments[midi.tracks[i].instrumentNumber] = await getInstrumentByNumber(audioCtx, midi.tracks[i].instrumentNumber);
+                if(!midiInstruments?.[midi.tracks[i].instrumentIndex]) {
+                    midiInstruments[midi.tracks[i].instrumentIndex] = await getInstrumentByNumber(audioCtx, midi.tracks[i].instrumentIndex);
                 }
             }
 

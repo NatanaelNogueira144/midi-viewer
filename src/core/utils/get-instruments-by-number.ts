@@ -133,7 +133,7 @@ const instrumentNames: InstrumentName[] = [
 
 export default async function getInstrumentByNumber(
     audioCtx: AudioContext, 
-    instrumentNumber: number
+    instrumentIndex: number
 ): Promise<Soundfont.Player> {
-    return await Soundfont.instrument(audioCtx, instrumentNames[instrumentNumber]);
+    return await Soundfont.instrument(audioCtx, instrumentNames[instrumentIndex]);
 }

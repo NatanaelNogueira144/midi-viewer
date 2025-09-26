@@ -3,7 +3,6 @@ import MidiContext from "../../data/contexts/MidiContext";
 import MidiKeyboard from "../MIDIKeyboard";
 import RoutesContext from "../../data/contexts/RoutesContext";
 import Soundfont from 'soundfont-player';
-import keyboard from "../../core/utils/keyboard";
 import useAPI from "../../data/hooks/useAPI";
 import {
     Container,
@@ -30,21 +29,21 @@ export default function PlayMidiArea({ instruments }: PlayMidiAreaProps) {
     const [showNotes, setShowNotes] = useState(false);
     const intervalRef = useRef(undefined as undefined|NodeJS.Timer);
 
-    useEffect(() => {
-        intervalRef.current = setInterval(() => {
-            if(!isPaused) setCurrentTime(prevTime => prevTime + 37);
-        }, 37);
-
-        return () => clearInterval(intervalRef.current);
-    }, [isPaused]);
-
     const notes = selectedMidi?.tracks
         .filter(t => !t.isMuted)
         .map(t => t.notes)
         .reduce((prev, curr) => [...prev, ...curr], []) ?? [];
     notes.sort((a, b) => a.startsAt - b.startsAt);
     const totalTime = selectedMidi!.duration;
-    const keyboardSize = api.settings.show().keyboard ?? 'piano';
+    const keyboardSize = api.settings.show().keyboardSize ?? 'piano';
+
+    useEffect(() => {
+        intervalRef.current = setInterval(() => {
+            if(!isPaused) setCurrentTime(prevTime => prevTime + 30);
+        }, 30);
+
+        return () => clearInterval(intervalRef.current);
+    }, [isPaused]);
 
     return (
         <Container>
@@ -70,15 +69,13 @@ export default function PlayMidiArea({ instruments }: PlayMidiAreaProps) {
             </ProgressBar>
 
             <MidiKeyboard 
-                blackKeys={keyboard[keyboardSize].blackKeyNotes}
                 currentTime={currentTime}
                 instruments={instruments}
                 totalTime={totalTime}
                 notes={notes}
                 onMidiEnd={() => setCurrentRoute('MidiSelect')}
                 showNotes={showNotes}
-                size={keyboardSize}
-                whiteKeys={keyboard[keyboardSize].whiteKeyNotes}
+                keyboardSize={keyboardSize}
             />
         </Container>
     );

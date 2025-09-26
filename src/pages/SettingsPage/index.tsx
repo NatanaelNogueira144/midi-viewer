@@ -27,7 +27,7 @@ export default function SettingsPage() {
     }
 
     const setToDefault = (): void =>  {
-        const defaultValues = { keyboard: 'piano', colorTheme: 'light' } as ISettings;
+        const defaultValues = { keyboardSize: 'piano', colorTheme: 'light' } as ISettings;
         setRequest(defaultValues);
         saveSettings();
     }
@@ -37,9 +37,9 @@ export default function SettingsPage() {
             <Container>
                 <FormWrapper>
                     <SelectInput 
-                        onChange={(e) => setRequest({...request, keyboard: e.target.value as KeyboardSize})}
-                        defaultValue={api.settings.show().keyboard}
-                        value={request.keyboard}
+                        onChange={(e) => setRequest({...request, keyboardSize: e.target.value as KeyboardSize})}
+                        defaultValue={api.settings.show().keyboardSize}
+                        value={request.keyboardSize}
                     >
                         <option value="piano">Piano (88 Keys)</option>
                         <option value="large">Large (76 Keys)</option>

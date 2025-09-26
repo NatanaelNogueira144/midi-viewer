@@ -6,6 +6,7 @@ import { ActionsContainer, Container, MIDITitle, TopHeader, TracksGrid } from ".
 import { IMidi } from "../../core/interfaces/models/midi.interface";
 import { ITrack } from "../../core/interfaces/models/track.interface";
 import { ITrackPallete } from "../../core/interfaces/models/track-pallete.interface";
+import { isNoteNatural } from "../../core/utils/note-utils";
 import { useContext } from "react";
 
 interface MIDISettingsAreaProps {
@@ -26,9 +27,7 @@ export default function MIDISettingsArea({ midi }: MIDISettingsAreaProps) {
             textColor: trackColor.textColor,
             notes: newMidi.tracks[trackIndex].notes.map(note => ({
                 ...note,
-                color: [0, 2, 4, 5, 7, 9, 11].includes(note.key % 12) 
-                    ? trackColor.whiteKey 
-                    : trackColor.blackKey
+                color: isNoteNatural(note.index) ? trackColor.whiteKey : trackColor.blackKey
             }))
         };
         
