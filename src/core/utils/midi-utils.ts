@@ -49,7 +49,8 @@ export function parseMIDIFile(file: File, callback: (midi: IMidi) => void): void
                                         velocity: noteOn.velocity,
                                         color: [0, 2, 4, 5, 7, 9, 11].includes(noteOn.noteNumber % 12) 
                                             ? trackPallete.whiteKey
-                                            : trackPallete.blackKey
+                                            : trackPallete.blackKey,
+                                        textColor: trackPallete.textColor
                                     });
                                 } else if(event.noteOff) {
                                     let noteOff = event.noteOff as { noteNumber: number; velocity: number };
@@ -66,14 +67,14 @@ export function parseMIDIFile(file: File, callback: (midi: IMidi) => void): void
 
                         return {
                             name: track.find(e => !!e.trackName)?.trackName ?? `Track ${trackIndex + 1}`,
+                            notes: parseTrackNotes(),
                             instrumentIndex: programNumber,
                             whiteKeyColor: trackPallete.whiteKey,
                             blackKeyColor: trackPallete.blackKey,
                             textColor: trackPallete.textColor,
-                            isMuted: false,
-                            notes: parseTrackNotes()
+                            isMuted: false
                         };
-                    })
+                    }).filter(t => t.notes.length > 0)
                 } as IMidi);
             });
         }

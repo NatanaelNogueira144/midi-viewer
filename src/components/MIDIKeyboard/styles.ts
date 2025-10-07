@@ -87,6 +87,7 @@ export const Block = styled.div.attrs<BlockProps>(({ $note, $currenttime, $keybo
 
     span {
         font-size: ${({ $note, $keyboardsize }) => `calc((${isNoteNatural($note.index) ? whiteKeyWidth($keyboardsize) : blackKeyWidth($keyboardsize)}) * 0.8)`};
+        color: ${({ $note }) => $note.textColor};
     }
 `;
 

@@ -5,4 +5,5 @@ export interface INote {
     endsAt: number;
     velocity: number;
     color: string;
+    textColor: string;
 }

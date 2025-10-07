@@ -1,7 +1,7 @@
 {
   "name": "midi-viewer",
   "homepage": "https://natanaelnogueira144.github.io/midi-viewer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": true,
   "dependencies": {
     "@testing-library/dom": "^10.4.1",
@@ -13,7 +13,6 @@
     "@types/react": "^19.1.11",
     "@types/react-dom": "^19.1.7",
     "midi-json-parser": "^8.1.67",
-    "midi-sounds-react": "^1.2.54",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-scripts": "5.0.1",
@@ -49,6 +48,7 @@
     ]
   },
   "devDependencies": {
+    "@types/webmidi": "^2.1.0",
     "gh-pages": "^6.3.0"
   }
 }

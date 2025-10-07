@@ -59,7 +59,7 @@ export default function MIDIKeyboard({
             onMidiEnd();
         }
 
-        notes.filter(b => b.startsAt < currentTime && b.startsAt + 30 > currentTime && currentTime < b.endsAt).forEach(b => {
+        notes.filter(b => b.startsAt <= currentTime && b.startsAt + 30 >= currentTime && currentTime < b.endsAt).forEach(b => {
             playNote(instruments[b.instrument], b);
         });
     }, [currentTime, instruments, totalTime, notes, onMidiEnd]);

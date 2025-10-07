@@ -1,7 +1,7 @@
 import React, { createContext, useState } from 'react';
 import dark from '../../styles/themes/dark';
-import useAPI from '../hooks/useAPI';
 import light from '../../styles/themes/light';
+import useAPI from '../hooks/useAPI';
 
 export interface ThemeContextProps {
     setTheme(theme: ITheme): void;
