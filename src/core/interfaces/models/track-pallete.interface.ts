@@ -1,5 +1,5 @@
 export interface ITrackPallete {
-    whiteKey: string;
-    blackKey: string;
-    textColor: string;
+  whiteKey: string;
+  blackKey: string;
+  textColor: string;
 }

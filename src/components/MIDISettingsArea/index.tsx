@@ -10,62 +10,62 @@ import { isNoteNatural } from "../../core/utils/note-utils";
 import { useContext } from "react";
 
 interface MIDISettingsAreaProps {
-    midi: IMidi;
+  midi: IMidi;
 }
 
 export default function MIDISettingsArea({ midi }: MIDISettingsAreaProps) {
-    const { setCurrentRoute } = useContext(RoutesContext);
-    const { setSelectedMidi } = useContext(MidiContext);
+  const { setCurrentRoute } = useContext(RoutesContext);
+  const { setSelectedMidi } = useContext(MidiContext);
 
-    const updateColorChangeOnMIDI = (track: ITrack, trackColor: ITrackPallete) => {
-        let newMidi = {...midi} as IMidi;
-        let trackIndex = newMidi.tracks.findIndex(t => t === track);
-        newMidi.tracks[trackIndex] = {
-            ...newMidi.tracks[trackIndex], 
-            whiteKeyColor: trackColor.whiteKey,
-            blackKeyColor: trackColor.blackKey,
-            textColor: trackColor.textColor,
-            notes: newMidi.tracks[trackIndex].notes.map(note => ({
-                ...note,
-                color: isNoteNatural(note.index) ? trackColor.whiteKey : trackColor.blackKey
-            }))
-        };
-        
-        setSelectedMidi(newMidi);
-    }
+  const updateColorChangeOnMIDI = (track: ITrack, trackColor: ITrackPallete) => {
+    let newMidi = {...midi} as IMidi;
+    let trackIndex = newMidi.tracks.findIndex(t => t === track);
+    newMidi.tracks[trackIndex] = {
+      ...newMidi.tracks[trackIndex], 
+      whiteKeyColor: trackColor.whiteKey,
+      blackKeyColor: trackColor.blackKey,
+      textColor: trackColor.textColor,
+      notes: newMidi.tracks[trackIndex].notes.map(note => ({
+        ...note,
+        color: isNoteNatural(note.index) ? trackColor.whiteKey : trackColor.blackKey
+      }))
+    };
+    
+    setSelectedMidi(newMidi);
+  }
 
-    const updateMuteChangeOnMIDI = (track: ITrack, isMuted: boolean) => {
-        let newMidi = {...midi} as IMidi;
-        let trackIndex = newMidi.tracks.findIndex(t => t === track);
+  const updateMuteChangeOnMIDI = (track: ITrack, isMuted: boolean) => {
+    let newMidi = {...midi} as IMidi;
+    let trackIndex = newMidi.tracks.findIndex(t => t === track);
 
-        newMidi.tracks[trackIndex].isMuted = isMuted;
-        setSelectedMidi(newMidi);
-    }
+    newMidi.tracks[trackIndex].isMuted = isMuted;
+    setSelectedMidi(newMidi);
+  }
 
-    return (
-        <Container>
-            <TopHeader>
-                <MIDITitle>{midi.name}</MIDITitle>
-                <ActionsContainer>
-                    <Button onClick={() => setSelectedMidi(undefined)}>
-                        Return
-                    </Button>
-                    <Button onClick={() => setCurrentRoute('MidiViewer')}>
-                        <span>▶</span> Play
-                    </Button>
-                </ActionsContainer>
-            </TopHeader>
-            
-            <TracksGrid>
-                {midi.tracks.map((track, key) => (
-                    <TrackCard 
-                        onColorChange={(trackColor) => updateColorChangeOnMIDI(track, trackColor)}
-                        onMutedChange={(isMuted) => updateMuteChangeOnMIDI(track, isMuted)}
-                        track={track}
-                        key={key}
-                    />
-                ))}
-            </TracksGrid>
-        </Container>
-    );
+  return (
+    <Container>
+      <TopHeader>
+        <MIDITitle>{midi.name}</MIDITitle>
+        <ActionsContainer>
+          <Button onClick={() => setSelectedMidi(undefined)}>
+            Return
+          </Button>
+          <Button onClick={() => setCurrentRoute('MidiViewer')}>
+            <span>▶</span> Play
+          </Button>
+        </ActionsContainer>
+      </TopHeader>
+      
+      <TracksGrid>
+        {midi.tracks.map((track, key) => (
+          <TrackCard 
+            onColorChange={(trackColor) => updateColorChangeOnMIDI(track, trackColor)}
+            onMutedChange={(isMuted) => updateMuteChangeOnMIDI(track, isMuted)}
+            track={track}
+            key={key}
+          />
+        ))}
+      </TracksGrid>
+    </Container>
+  );
 }

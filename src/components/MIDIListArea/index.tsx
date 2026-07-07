@@ -7,20 +7,20 @@ import { parseMIDIFile } from "../../core/utils/midi-utils";
 import { useEffect, useState } from "react";
 
 export default function MIDIListArea() {
-    const { api } = useAPI();
-    const [midis, setMidis] = useState([] as MidiList);
+  const { api } = useAPI();
+  const [midis, setMidis] = useState([] as MidiList);
 
-    useEffect(() => {
-        setMidis(api.midi.list());
-    }, [api]);
-    
-    return (
-        <>
-            <MidiFilePicker onChange={(file) => {
-                parseMIDIFile(file, (midi) => setMidis([...midis, api.midi.store({...midi} as ISaveMidiRequest)]));
-            }} />
+  useEffect(() => {
+    setMidis(api.midi.list());
+  }, [api]);
+  
+  return (
+    <>
+      <MidiFilePicker onChange={(file) => {
+        parseMIDIFile(file, (midi) => setMidis([...midis, api.midi.store({...midi} as ISaveMidiRequest)]));
+      }} />
 
-            <MIDIList midis={midis} setMidis={setMidis} />
-        </>
-    );
+      <MIDIList midis={midis} setMidis={setMidis} />
+    </>
+  );
 }

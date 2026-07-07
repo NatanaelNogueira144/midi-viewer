@@ -7,28 +7,29 @@ import { IMidi } from "../../core/interfaces/models/midi.interface";
 import { useContext, useEffect, useState } from "react";
 
 export default function MIDIViewerPage() {
-    const { selectedMidi } = useContext(MidiContext);
-    const [instruments, setInstruments] = useState(undefined as {[key: number]: Soundfont.Player}|undefined);
+  const { selectedMidi } = useContext(MidiContext);
+  const [instruments, setInstruments] = useState(undefined as {[key: number]: Soundfont.Player}|undefined);
 
-    useEffect(() => {
-        const loadInstruments = async (midi: IMidi): Promise<void> => {
-            const audioCtx = new (window.AudioContext)();
-            let midiInstruments: {[key: number]: Soundfont.Player} = {};
-            for(let i = 0; i < midi.tracks.length; i++) {
-                if(!midi.tracks[i].isMuted && !midiInstruments?.[midi.tracks[i].instrumentIndex]) {
-                    midiInstruments[midi.tracks[i].instrumentIndex] = await getInstrumentByNumber(audioCtx, midi.tracks[i].instrumentIndex);
-                }
-            }
-
-            setInstruments(midiInstruments);
+  useEffect(() => {
+    const loadInstruments = async (midi: IMidi): Promise<void> => {
+      const audioCtx = new (window.AudioContext)();
+      let midiInstruments: {[key: number]: Soundfont.Player} = {};
+      for (let i = 0; i < midi.tracks.length; i++) {
+        if (!midi.tracks[i].isMuted && !midiInstruments?.[midi.tracks[i].instrumentIndex]) {
+          midiInstruments[midi.tracks[i].instrumentIndex] = 
+            await getInstrumentByNumber(audioCtx, midi.tracks[i].instrumentIndex);
         }
-        
-        if(selectedMidi) loadInstruments(selectedMidi);
-    }, [selectedMidi]);
+      }
+
+      setInstruments(midiInstruments);
+    }
     
-    return instruments ? (
-        <PlayMidiArea instruments={instruments} />
-    ) : (
-        <LoadingScreen />
-    );
+    if(selectedMidi) loadInstruments(selectedMidi);
+  }, [selectedMidi]);
+  
+  return instruments ? (
+    <PlayMidiArea instruments={instruments} />
+  ) : (
+    <LoadingScreen />
+  );
 }

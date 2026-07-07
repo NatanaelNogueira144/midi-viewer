@@ -5,15 +5,15 @@ import MidiContext from "../../data/contexts/MidiContext";
 import { useContext } from "react";
 
 export default function MIDISelectPage() {
-    const { selectedMidi } = useContext(MidiContext);
+  const { selectedMidi } = useContext(MidiContext);
 
-    return (
-        <Layout>
-            {selectedMidi ? (
-                <MIDISettingsArea midi={selectedMidi} />
-            ) : (
-                <MIDIListArea />
-            )}
-        </Layout>
-    );
+  return (
+    <Layout>
+      {selectedMidi ? (
+        <MIDISettingsArea midi={selectedMidi} />
+      ) : (
+        <MIDIListArea />
+      )}
+    </Layout>
+  );
 }
